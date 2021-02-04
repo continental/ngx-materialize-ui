@@ -1,0 +1,44 @@
+<div class="navbar-fixed">
+    <nav>
+        <div class="nav-wrapper">
+
+            <!-- List with main menu button and application title -->
+            <ul>
+                <li *ngIf="mainMenuTap.observers.length > 0"><a (click)="_onMainMenuClick()"><i class="material-icons">menu</i></a></li>
+                <li class="hide-on-small-only"><span class="app-title">{{appTitle}}</span></li>
+            </ul>
+
+            <!-- Placeholder for search bar -->
+            <ng-container *ngIf="_appBarSearch" [ngTemplateOutlet]="_appBarSearch._template"></ng-container>
+
+            <!-- Wrap all actions and drowpdowns into a div -->
+            <div class="app-bar-group">
+                <!-- List with app bar actions for medium and above screen sizes -->
+                <ul class="hide-on-small-only" *ngIf="_appBarActions?.first">
+                    <ng-container *ngFor="let action of _appBarActions" [ngTemplateOutlet]="action._template"></ng-container>
+                </ul>
+
+                <!-- List with app bar actions for mobile screen sizes -->
+                <ul class="hide-on-med-and-up">
+                    <li>
+                        <a href="#!" #actionsDropdownTrigger data-target="appBarActionsDropdown" class="dropdown-trigger">
+                            <i class="material-icons">more_horiz</i>
+                        </a>
+                        <div id="appBarActionsDropdown" class='dropdown-content'>
+                            <div class="collection">
+                                <ng-container *ngFor="let action of _appBarActions" [ngTemplateOutlet]="action._mobileTemplate">
+                                </ng-container>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <!-- List with app bar dropdowns -->
+                <ul *ngIf="_appBarDropdowns?.first">
+                    <ng-container *ngFor="let dropdown of _appBarDropdowns" [ngTemplateOutlet]="dropdown._template">
+                    </ng-container>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>

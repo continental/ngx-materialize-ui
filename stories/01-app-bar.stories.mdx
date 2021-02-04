@@ -1,0 +1,204 @@
+import { Meta, Story, Props, ComponentsTable, Preview } from '@storybook/addon-docs/blocks';
+import { action } from '@storybook/addon-actions';
+import { moduleMetadata } from '@storybook/angular';
+
+import { RootContainerComponent } from 'ngx-materialize-ui-core';
+import { AppBarComponent, AppBarActionComponent, AppBarDropdownComponent, AppBarSearchComponent, MUI_APP_BAR_SEARCH_SERVICE, SearchService } from 'ngx-materialize-ui-core';
+
+import * as materialize from 'materialize-css/dist/js/materialize';
+
+<Meta title='Components/App Bar' decorators={[
+  moduleMetadata({
+    declarations: [
+      RootContainerComponent, 
+      AppBarComponent, 
+      AppBarActionComponent, 
+      AppBarDropdownComponent,
+      AppBarSearchComponent
+    ],
+    providers: [{ 
+      // Register an ad hoc search service to create chunks of search string as dummy search results
+      provide: MUI_APP_BAR_SEARCH_SERVICE, 
+      useValue: { 
+        executeSearch: function(searchString) { 
+          action('Search string changed to: ' + searchString)(); 
+          if(searchString.length === 0) { return Promise.resolve([]); }
+          let partLength = Math.ceil(searchString.length / 4);
+          let dummySearchResults = searchString.match(new RegExp('.{1,' + partLength + '}', 'g'));
+          return Promise.resolve(dummySearchResults);
+        } 
+      } 
+    }]
+  })
+]} />
+
+# App Bar
+The **App Bar** component can be used to show the most basic navigation items needed in each app. 
+This includes the main menu button as well as global actions. Futhermore the App Bar can show the
+application title and a global search field if required. The component and all its subcomponents
+respond to differnt screen sizes out of the box. The entire App Bar is always fixed to the top. 
+
+## Basic
+The most basic App Bar just shows the application title. To realize this use `<mui-app-bar>` elment 
+and set the `appTitle` Attribute to the name of your application.
+
+<Preview>
+  <Story name='Basic' height='80px'>{{
+    template: `
+      <mui-root-container>
+        <mui-app-bar appTitle="App Title"></mui-app-bar>
+      </mui-root-container>`,
+  }}
+  </Story>
+</Preview>
+
+## Main Menu
+To show a **Main Menu Button** within the App Bar component just bind the `mainMenuClick` attribute to 
+an existing method. This attribute is an event handler called each time the main menu button is clicked.
+The main menu button is automatically rendered as soon as the mentioned attribute is bound to an 
+event handler. 
+
+<Preview>
+  <Story name='Main Menu' height='80px'>{{
+    template: `
+      <mui-root-container>
+        <mui-app-bar (mainMenuTap)="onMainMenuTap()" appTitle="App Title"></mui-app-bar>
+      </mui-root-container>`,
+    props: {
+      onMainMenuTap: () => {
+        action('Main Menu was tapped!')();
+      }
+    }
+  }}
+  </Story>
+</Preview>
+
+## Actions
+To place a global **Action** into the app bar place a `<mui-app-bar-action>` element inside the
+`<mui-app-bar>` element and set the `iconName` and `actionName` attributes of this element. You
+can add as much actions as you need. For usability reasons it is recommendet to not add more than
+3 to 5 actions into the app bar. An action is rendred with its corresponding icon directly into
+the app bar. On small screen sizes all actions are bundled into a dropdown menu to save space.
+In this case the `actionName` is also rendered into the dropdown. 
+
+<Preview>
+  <Story name='Actions' height='80px'>{{
+    template: `
+      <mui-root-container>
+        <mui-app-bar (mainMenuTap)="onMainMenuTap()" appTitle="App Title">
+          <mui-app-bar-action iconName="refresh" actionName="Action 1" (tap)="onActionTap('action1')"></mui-app-bar-action>
+          <mui-app-bar-action iconName="schedule" actionName="Action 2" (tap)="onActionTap('action2')"></mui-app-bar-action>
+        </mui-app-bar>
+      </mui-root-container>`,
+    props: {
+      onMainMenuTap: () => {
+        action('Main Menu was clicked!')();
+      },
+      onActionTap: (actionId) => {
+        action('Action ' + actionId + ' was tapped!')();
+      }
+    }
+  }}
+  </Story>
+</Preview>
+
+## Dropdowns
+Besides actions you can also add **Dropdowns** to the app bar. To do this, add a `<mui-app-bar-dropdown>`
+element inside the `<mui-app-bar>` element. The trigger of app bar dropdowns are always rendered right to
+the actions with the icon you set in the `iconName` attribute. You can design the content of your dropdown
+completely on your own. The Example below shows a dropdown which contains a collection.
+
+<Preview>
+  <Story name='Dropdowns' height='220px'>{{
+    template: `
+      <mui-root-container>
+        <mui-app-bar (mainMenuTap)="onMainMenuTap()" appTitle="App Title">
+          <mui-app-bar-dropdown iconName="settings">
+            <ul class="collection">
+              <li class="collection-item">First</li>
+              <li class="collection-item">Second</li>
+              <li class="collection-item">Third</li>
+            </ul>
+          </mui-app-bar-dropdown>
+        </mui-app-bar>
+      </mui-root-container>`,
+    props: {
+      onMainMenuTap: () => {
+        action('Main Menu was clicked!')();
+      }
+    }
+  }}
+  </Story>
+</Preview>
+
+## Search
+You can add a global **Search** field to your app bar by placing a `<mui-app-bar-search>` element inside 
+the `<mui-app-bar>` element. The search component provides an event which is triggered each time a user
+modifies the search string with a debounce time of 600ms. The data retured by the event handler gets 
+automatically rendered into the result list of the search field. Furthermore you can set the `placeholder`
+attribute to show a placeholder string in the search bar. Only one `<mui-app-bar-search>` element is 
+allowed inside the `<mui-app-bar>` element.
+
+For the search feature you additionaly have to implement the `SearchService` interface and register it
+with the `mui_APP_BAR_SEARCH_SERVICE` token. Both items are provided by the _Materialize UI Core_ library.
+
+<Preview>
+  <Story name='Search' height='270px'>{{
+    template: `
+      <mui-root-container>
+        <mui-app-bar (mainMenuTap)="onMainMenuTap()" appTitle="App Title">
+          <mui-app-bar-search placeholder="Search..."></mui-app-bar-search>
+        </mui-app-bar>
+      </mui-root-container>`,
+    props: {
+      onMainMenuTap: () => {
+        action('Main Menu was clicked!')();
+      }
+    }
+  }}
+  </Story>
+</Preview>
+
+## Full
+The following example shows an app bar with all features (Main Menu, Search, Actions, Dropdown) enabled. 
+In general you can combine all the features as required by your use case. But be aware that too much items
+inside of the app bar will confuse users and makes a bad usability.
+
+<Preview>
+  <Story name='Full' height='270px'>{{
+    template: `
+      <mui-root-container>
+        <mui-app-bar appTitle="App Title" (mainMenuTap)="onMainMenuTap()">
+          <mui-app-bar-search placeholder="Search..."></mui-app-bar-search>
+          <mui-app-bar-action iconName="refresh" actionName="Action 1" (tap)="onActionTap('action1')"></mui-app-bar-action>
+          <mui-app-bar-action iconName="schedule" actionName="Action 2" (tap)="onActionTap('action2')"></mui-app-bar-action>
+          <mui-app-bar-dropdown iconName="settings">
+              <ul class="collection">
+                  <li class="collection-item">First</li>
+                  <li class="collection-item">Second</li>
+                  <li class="collection-item">Third</li>
+                </ul>
+            </mui-app-bar-dropdown>
+        </mui-app-bar>
+      </mui-root-container>`,
+    props: {
+      onMainMenuTap: () => {
+        action('Main Menu was clicked!')();
+      },
+      onActionTap: (actionId) => {
+        action('Action ' + actionId + ' was tapped!')();
+      }
+    }
+  }}
+  </Story>
+</Preview>
+
+## Reference
+The table below lists the properties of the classes behind the selectors used to create the app bar.
+<ComponentsTable components={{
+  'AppBarComponent': AppBarComponent, 
+  'AppBarActionComponent': AppBarActionComponent,
+  'AppBarDropdownComponent': AppBarDropdownComponent,
+  'AppBarSearchComponent': AppBarSearchComponent}} 
+  exclude={'_.*|ng.*'} 
+/>

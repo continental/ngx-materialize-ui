@@ -1,0 +1,115 @@
+import { Meta, Story, Props, ComponentsTable, Preview } from '@storybook/addon-docs/blocks';
+import { action } from '@storybook/addon-actions';
+import { moduleMetadata } from '@storybook/angular';
+import { PercentPipe } from '@angular/common';
+
+import { RootContainerComponent, ViewHeaderComponent, ViewHeaderActionComponent, ViewHeaderDropdownComponent, CdkCellDef} from 'ngx-materialize-ui-core';
+
+import * as materialize from 'materialize-css/dist/js/materialize';
+
+<Meta title='Components/View Header' decorators={[
+  moduleMetadata({
+    declarations: [
+      RootContainerComponent,
+      ViewHeaderComponent,
+      ViewHeaderActionComponent,
+      ViewHeaderDropdownComponent
+    ],
+    providers: [PercentPipe]
+  })
+]} />
+
+# View Header
+The **View Header** component is intendet to be used as header for each single view.
+
+## Basic
+In the most basic version, the View Header just shows the tile of the view. Use the `title` attribute to set the title of the view.
+<Preview>
+  <Story name='Basic' height='100px'>{{
+    template: `
+      <mui-root-container>
+        <mui-view-header title="My View Title">
+        </mui-view-header>
+      </mui-root-container>`
+  }}
+  </Story>
+</Preview>
+
+## Actions
+You can place global action for your current view into the view header by adding `<mui-view-header-action>` elements as childs
+to the `<mui-view-header>` element.v For usability reasons it is recommendet to not add more than 3 actions to the view header.
+An action is rendred with its corresponding `actionName` directly into the view header. On small screen sizes all actions are 
+bundled into a dropdown menu to save space. In this case the icon specified via `iconName` is also rendered into the dropdown. 
+<Preview>
+  <Story name='Actions' height='100px'>{{
+    template: `
+      <mui-root-container>  
+        <mui-view-header title="My View Title">
+          <mui-view-header-action actionName="New" iconName="add" (tap)="onActionTap('new')"></mui-view-header-action>
+          <mui-view-header-action actionName="Refresh" iconName="refresh" (tap)="onActionTap('refresh')"></mui-view-header-action>
+        </mui-view-header>
+      </mui-root-container>`,
+    props: {
+      onActionTap: (actionId) => {
+        action('Action ' + actionId + ' was tapped!')();
+      }
+    }
+  }}
+  </Story>
+</Preview>
+
+> Your can also add a `routerLink` attribute to the action. This one is executed after the `tap` event and 
+> behaves the same way as the deault Angular routerLink directive (means you can set a singe string as route or
+> an array or route url componentes).
+
+## Dropdown
+You can place one global dropdown for your current view containing details or not frequently used actions by adding
+a `<mui-view-header-dropdown>` element as childs to the `<mui-view-header>` element. 
+<Preview>
+  <Story name='Dropdown' height='180px'>{{
+    template: `
+      <mui-root-container>  
+        <mui-view-header title="My View Title">
+          <mui-view-header-dropdown iconName="settings">
+              <ul class="collection">
+                <li class="collection-item">First</li>
+                <li class="collection-item">Second</li>
+                <li class="collection-item">Third</li>
+              </ul>
+          </mui-view-header-dropdown>
+        </mui-view-header>
+      </mui-root-container>`
+  }}
+  </Story>
+</Preview>
+
+## Full
+You can also combine actions and a dropdown inside the view header. 
+<Preview>
+  <Story name='Full' height='180px'>{{
+    template: `
+      <mui-root-container>  
+        <mui-view-header title="My View Title">
+          <mui-view-header-action actionName="New" iconName="add"></mui-view-header-action>
+          <mui-view-header-action actionName="Refresh" iconName="refresh"></mui-view-header-action>
+          <mui-view-header-dropdown iconName="settings">
+              <ul class="collection">
+                <li class="collection-item">First</li>
+                <li class="collection-item">Second</li>
+                <li class="collection-item">Third</li>
+              </ul>
+          </mui-view-header-dropdown>
+        </mui-view-header>
+      </mui-root-container>`
+  }}
+  </Story>
+</Preview>
+
+## Reference
+The table below lists the properties of the classes behind the selectors used to create the different view header variants.
+<ComponentsTable components={{
+  'ViewHeader': ViewHeaderComponent,
+  'ViewHeaderAction': ViewHeaderActionComponent,
+  'ViewHeaderDropdown': ViewHeaderDropdownComponent}} 
+  exclude={'_.*|ng.*'} 
+/>

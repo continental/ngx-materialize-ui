@@ -1,0 +1,204 @@
+import { Meta, Story, Props, ComponentsTable, Preview } from '@storybook/addon-docs/blocks';
+import { action } from '@storybook/addon-actions';
+import { moduleMetadata } from '@storybook/angular';
+
+import { RootContainerComponent, CardComponent, CardContentComponent, CardImageComponent, CardContentMetricComponent, CardActionsComponent} from 'ngx-materialize-ui-core';
+
+import * as materialize from 'materialize-css/dist/js/materialize';
+
+<Meta title='Components/Card' decorators={[
+  moduleMetadata({
+    declarations: [
+      RootContainerComponent,
+      CardComponent,
+      CardContentComponent,
+      CardImageComponent,
+      CardContentMetricComponent,
+      CardActionsComponent
+    ],
+    providers: []
+  })
+]} />
+
+# Card
+The **Card** component can be used to show semi structured information. Cards can easily adopt different scrren sizes thus it
+is easy to create responsive designs using cards. To make cards adoptable to different screen sizes use this component in
+conjunction with the standard grid classes of the materialize css framework.
+
+## Basic
+The following preview shows a very basic card with just a title and content. To create a card you alwas have to enclose your
+entire card content with the `<mui-card>` element. To set up this simple card create a `<mui-card-content>` element inside of 
+the `<mui-card>` element and set the title to the `title` attribute of that element. The main content of you card shall be 
+enclosed by this `<mui-card-content>` element. Basically you can use any markup as content.
+<Preview>
+  <Story name='Basic' height='170px'>{{
+    template: `
+      <mui-root-container>
+        <div class="row">
+            <mui-card class="col s10 m6 l4 xl3">
+              <mui-card-content title="My Card Title">
+                <p>I am a very simple card!</p>
+                <p>I can have paragraphs and other markup as content</p>
+              </mui-card-content>
+            </mui-card>
+        </div>
+      </mui-root-container>`,
+  }}
+  </Story>
+</Preview>
+
+## Images
+Cards can also contain images stacked with the content of the card using the `<mui-card-image>` element. If you want you can
+show your card title as overlay on the image by setting the `title` attribute of the `<mui-card-image>` element as the preview
+below shows.
+<Preview>
+  <Story name='One Image' height='300px'>{{
+    template: `
+      <mui-root-container>
+        <div class="row">
+            <mui-card class="col s10 m6 l4 xl3">
+              <mui-card-image imageUrl="https://place-hold.it/350x140/" title="My Card Title"></mui-card-image>
+              <mui-card-content>
+                I am a card with an image on top!
+              </mui-card-content>
+            </mui-card>
+        </div>
+      </mui-root-container>`,
+  }}
+  </Story>
+</Preview>
+
+You can also stack multipe images and and contents above each other within one card as the following preview shows. Then you 
+can also use the title attribute on each stack layer (image, or content) to describe your content.
+
+<Preview>
+  <Story name='Multiple Images' height='470px'>{{
+    template: `
+      <mui-root-container>
+        <div class="row">
+            <mui-card class="col s10 m6 l4 xl3">
+              <mui-card-image imageUrl="https://place-hold.it/350x100/" title="My Card Title"></mui-card-image>
+              <mui-card-content title="Primary Info">
+                I am the first conent space!
+              </mui-card-content>
+              <mui-card-image imageUrl="https://place-hold.it/350x60/" title="A second Image"></mui-card-image>
+              <mui-card-content title="Additional Info">
+                Some additional infos
+              </mui-card-content>
+            </mui-card>
+        </div>
+      </mui-root-container>`,
+  }}
+  </Story>
+</Preview>
+
+## Metrics
+You can use the `<mui-card-content-metric>` element to easily show semi structured information on a card like metrics or KPIs. 
+To show the metrics in a responsive manner use a grid row inside of a `<mui-card-content>` element and add multiple
+`<mui-card-content-metric>` elements inside the grid row in conjunction with the standard grid classes of the materialize css.
+framework. You can use the `title` and `subtitle` attributes of the `<mui-card-content-metric>` to show a title and subtitle 
+for your metric. The metric value itself shall be enclosed by the `<mui-card-conent-metric>` element.
+<Preview>
+  <Story name='Metrics' height='350px'>{{
+    template: `
+      <mui-root-container>
+        <div class="row">
+            <mui-card class="col s10 m6 l4 xl3">
+              <mui-card-content title="My Card Title">
+                I am a card providing insights by displaying some metrics!
+                <div class="row">
+                  <mui-card-content-metric class="col s6 m3" title="Metric Name" subtitle="Unit/Diff">
+                    ABC
+                  </mui-card-content-metric>
+                  <mui-card-content-metric class="col s6 m3" title="Metric Name" subtitle="Unit/Diff">
+                    123
+                  </mui-card-content-metric>
+                  <mui-card-content-metric class="col s6 m3" title="Metric Name" subtitle="Unit/Diff">
+                    ABC
+                  </mui-card-content-metric>
+                  <mui-card-content-metric class="col s6 m3" title="Metric Name" subtitle="Unit/Diff">
+                    123
+                  </mui-card-content-metric>
+                </div>
+              </mui-card-content>
+            </mui-card>
+        </div>
+      </mui-root-container>`,
+  }}
+  </Story>
+</Preview>
+
+## Actions
+To show actions on the card use the `<mui-card-actions>` element. Inside of this element you can add an arbitrary number of 
+actions by adding `<a>` elements inside.
+<Preview>
+  <Story name='Actions' height='200px'>{{
+    template: `
+      <mui-root-container>
+        <div class="row">
+            <mui-card class="col s10 m6 l4 xl3">
+              <mui-card-content>
+                I am a simple card with actions!
+              </mui-card-content>
+              <mui-card-actions>
+                  <a (click)="onActionTap(1)">Action 1</a>
+                  <a (click)="onActionTap(2)">Action 2</a>
+              </mui-card-actions>
+            </mui-card>
+        </div>
+      </mui-root-container>`,
+    props: {
+      onActionTap: (actionId) => {
+        action('Action ' + actionId + ' was tapped!')();
+      }
+    }
+  }}
+  </Story>
+</Preview>
+
+## Full
+The preview below shows a card with all features combined into one card. 
+<Preview>
+  <Story name='Full' height='380px'>{{
+    template: `
+      <mui-root-container>
+        <div class="row">
+            <mui-card class="col s10 m6 l4 xl3">
+              <mui-card-image imageUrl="https://place-hold.it/350x100/" title="My Card Title"></mui-card-image>
+              <mui-card-content>
+                I am a card with all features!
+                <div class="row">
+                  <mui-card-content-metric class="col s6" title="Metric Name" subtitle="Unit/Diff">
+                    ABC
+                  </mui-card-content-metric>
+                  <mui-card-content-metric class="col s6" title="Metric Name" subtitle="Unit/Diff">
+                    123
+                  </mui-card-content-metric>
+                </div>
+              </mui-card-content>
+              <mui-card-actions>
+                  <a (click)="onActionTap(1)">Action 1</a>
+                  <a (click)="onActionTap(2)">Action 2</a>
+              </mui-card-actions>
+            </mui-card>
+        </div>
+      </mui-root-container>`,
+    props: {
+      onActionTap: (actionId) => {
+        action('Action ' + actionId + ' was tapped!')();
+      }
+    }
+  }}
+  </Story>
+</Preview>
+
+## Reference
+The table below lists the properties of the classes behind the selectors used to create the different cards.
+<ComponentsTable components={{
+  'CardComponent': CardComponent,
+  'CardContentComponent': CardContentComponent,
+  'CardContentMetricComponent': CardContentMetricComponent,
+  'CardImageComponent': CardImageComponent,
+  'CardActionsComponent': CardActionsComponent }} 
+  exclude={'_.*|ng.*'} 
+/>

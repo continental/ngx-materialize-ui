@@ -1,0 +1,58 @@
+<mui-root-container>
+    <mui-app-bar appTitle="UI Playground" (mainMenuTap)="sideNav.toggle()">
+        <!-- <mui-app-bar-search></mui-app-bar-search> -->
+        <mui-app-bar-action iconName="refresh" actionName="Refresh"></mui-app-bar-action>
+        <mui-app-bar-action iconName="schedule" actionName="Schedule"></mui-app-bar-action>
+        <mui-app-bar-dropdown iconName="settings">
+            <ul class="collection">
+                <li class="collection-item">First</li>
+                <li class="collection-item">Second</li>
+                <li class="collection-item">Third</li>
+                <li class="collection-item">Fourth</li>
+            </ul>
+        </mui-app-bar-dropdown>
+    </mui-app-bar>
+    <mui-side-nav #sideNav mode="pushBelowAppBar">
+        <li>
+            <div class="user-view">
+                <div class="background">
+                <img src="https://place-hold.it/300x176/999">
+                </div>
+            <a href="#user"><img class="circle" src="https://place-hold.it/64/393"></a>
+            <a href="#name"><span class="white-text name">John Doe</span></a>
+            <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+          </div>
+        </li>
+        <li><a href="#!" class="waves-effect"><i class="material-icons">cloud</i>First Link With Icon</a></li>
+        <li><a href="#!" class="waves-effect"><i class="material-icons">settings</i>Second Link With Icon</a></li>
+        <li><div class="divider"></div></li>
+        <li><a class="subheader">Subheader</a></li>
+        <li><a class="waves-effect" href="#!">Third Link without Icon</a></li>
+    </mui-side-nav>
+    <mui-push-content>
+        <mui-view-header title="My Page">
+            <mui-view-header-action actionName="Action1" iconName="refresh"></mui-view-header-action>
+            <mui-view-header-action actionName="Action2" iconName="refresh"></mui-view-header-action>
+            <mui-view-header-dropdown iconName="settings">
+                <ul class="collection">
+                    <li class="collection-item">First</li>
+                    <li class="collection-item">Second</li>
+                    <li class="collection-item">Third</li>
+                    <li class="collection-item">Fourth</li>
+                </ul>
+            </mui-view-header-dropdown>
+        </mui-view-header>
+
+        <div class="row">
+            <mui-text-box class="col s12" label="Text Box Label" name="myTextBox"></mui-text-box>
+
+            <mui-table class="col s12" [dataSource]="dataSource" highlight="true">
+                <mui-table-colspec label="ID" key="id"></mui-table-colspec>
+                <mui-table-colspec label="First Name" key="firstName"></mui-table-colspec>
+                <mui-table-colspec label="Last Name" key="lastName"></mui-table-colspec>
+                <mui-table-colspec label="Score" key="score" [format]="[['percent']]"></mui-table-colspec>
+            </mui-table>
+        </div>
+         
+    </mui-push-content>
+</mui-root-container>

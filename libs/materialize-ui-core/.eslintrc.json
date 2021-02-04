@@ -1,0 +1,69 @@
+{
+  "extends": "../../.eslintrc.json",
+  "ignorePatterns": [
+    "!**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "libs/materialize-ui-core/tsconfig.lib.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "rules": {
+        "no-underscore-dangle": [
+          "error",
+          {
+            "allow": ["_overlay", "_closeBound", "_hasFocus"],
+            "allowAfterThis": true
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "mui",
+            "style": "kebab-case"
+          }
+        ],
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "mui",
+            "style": "camelCase"
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "*.spec.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "libs/materialize-ui-core/tsconfig.spec.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "rules": {
+        "no-underscore-dangle": [
+          "error",
+          {
+            "allow": ["_template", "_dropdownTrigger", "_format", "_executeSearch"]
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "rules": {}
+    }
+  ]
+}

@@ -1,0 +1,166 @@
+import { Meta, Story, Props, ComponentsTable, Preview } from '@storybook/addon-docs/blocks';
+import { action } from '@storybook/addon-actions';
+import { moduleMetadata } from '@storybook/angular';
+import { PercentPipe } from '@angular/common';
+
+import { RootContainerComponent, TableComponent, TableColspecComponent, CdkCellDef} from 'ngx-materialize-ui-core';
+
+import * as materialize from 'materialize-css/dist/js/materialize';
+
+<Meta title='Components/Table' decorators={[
+  moduleMetadata({
+    declarations: [
+      RootContainerComponent,
+      TableComponent,
+      TableColspecComponent
+    ],
+    providers: [PercentPipe]
+  })
+]} />
+
+# Table
+The **Table** component renders a simple table and can be used to show structured data.
+
+## Basic
+To create a table use the `<mui-table>` and the `<mui-table-colspec>` elements. Set the `dataSource` attribute at the 
+`<mui-table>` element to an array of objects. For each column you would like to render create a `<mui-table-colspec>` element
+inside of the `<mui-table>` elment. At the `<mui-table-colspec>` element set the name of the colum to the `label` attribute
+and the key of the object to get the data from to the `key` attribute.
+<Preview>
+  <Story name='Basic' height='270px'>{{
+    template: `
+      <mui-root-container>
+        <mui-table [dataSource]="dataSource">
+          <mui-table-colspec label="ID" key="id"></mui-table-colspec>
+          <mui-table-colspec label="First Name" key="firstName"></mui-table-colspec>
+          <mui-table-colspec label="Last Name" key="lastName"></mui-table-colspec>
+          <mui-table-colspec label="Score" key="score"></mui-table-colspec>
+        </mui-table>
+      </mui-root-container>`,
+    props: {
+      dataSource: [ {id: 1, firstName: 'John', lastName: 'Rambo', score: 0.95 },
+                    {id: 2, firstName: 'Rockey', lastName: 'Balboa', score: 0.94 },
+                    {id: 3, firstName: 'Marty', lastName: 'McFly', score: 0.98 },
+                    {id: 4, firstName: 'Emmet', lastName: 'Brown', score: 0.91 } ]
+    }
+  }}
+  </Story>
+</Preview>
+
+## Striped
+You can create a striped table by setting the `striped` attribute of the `<mui-table>` element to `true`.
+<Preview>
+  <Story name='Striped' height='270px'>{{
+    template: `
+      <mui-root-container>
+        <mui-table [dataSource]="dataSource" striped="true">
+          <mui-table-colspec label="ID" key="id"></mui-table-colspec>
+          <mui-table-colspec label="First Name" key="firstName"></mui-table-colspec>
+          <mui-table-colspec label="Last Name" key="lastName"></mui-table-colspec>
+          <mui-table-colspec label="Score" key="score"></mui-table-colspec>
+        </mui-table>
+      </mui-root-container>`,
+    props: {
+      dataSource: [ {id: 1, firstName: 'John', lastName: 'Rambo', score: 0.95 },
+                    {id: 2, firstName: 'Rockey', lastName: 'Balboa', score: 0.94 },
+                    {id: 3, firstName: 'Marty', lastName: 'McFly', score: 0.98 },
+                    {id: 4, firstName: 'Emmet', lastName: 'Brown', score: 0.91 } ]
+    }
+  }}
+  </Story>
+</Preview>
+
+## Tapable Row
+You can create a table where a row is tapable and highlights the corresponding row on mouse hover by setting the `onRowTap` 
+attribute of the `<mui-table>` element to an event handler. On a row tap you get the data of the corresponding row delivered
+as event arguments to work with it in the event handler. 
+<Preview>
+  <Story name='Tapable Row' height='270px'>{{
+    template: `
+      <mui-root-container>
+        <mui-table [dataSource]="dataSource" (rowTap)="onRowTap($event)">
+          <mui-table-colspec label="ID" key="id">
+            <ng-template let-rowData>My custom template: {{rowData.id}}</ng-template>
+          </mui-table-colspec>
+          <mui-table-colspec label="First Name" key="firstName"></mui-table-colspec>
+          <mui-table-colspec label="Last Name" key="lastName"></mui-table-colspec>
+          <mui-table-colspec label="Score" key="score"></mui-table-colspec>
+        </mui-table>
+      </mui-root-container>`,
+    props: {
+      dataSource: [ {id: 1, firstName: 'John', lastName: 'Rambo', score: 0.95 },
+                    {id: 2, firstName: 'Rockey', lastName: 'Balboa', score: 0.94 },
+                    {id: 3, firstName: 'Marty', lastName: 'McFly', score: 0.98 },
+                    {id: 4, firstName: 'Emmet', lastName: 'Brown', score: 0.91 } ],
+      onRowTap: (rowData) => {  
+        action('Row with data ' + JSON.stringify(rowData) + ' was tapped!')();
+      }
+    }
+  }}
+  </Story>
+</Preview>
+
+## Format
+You can specifiy a format for each columnt using custom and build in pipes. To specifiy a format set the required pipes to
+the `format` attribute of the `<mui-table-colspec>` element of the corresponding column you with to format. Other than in the
+usual angular template expressions ( using doule curly brackets `{{}}`) you have to specific the needed pipes and its arguments
+in a two dimensional array in the form of: `[ ['pipe1', pipe1.arg1, pipe1.arg2], ['pipe2', pipe2.arg1, pipe2.arg2], ... ]`.
+The inner array contains the name of the pipe in the first element. The following element of the inner array contain the pipe
+arguments. The outer array holds a arbitrary numbe op pipe specs. The following example shows how to use the percent pipe.
+<Preview>
+  <Story name='Format' height='270px'>{{
+    template: `
+      <mui-root-container>
+        <mui-table [dataSource]="dataSource">
+          <mui-table-colspec label="ID" key="id"></mui-table-colspec>
+          <mui-table-colspec label="First Name" key="firstName"></mui-table-colspec>
+          <mui-table-colspec label="Last Name" key="lastName"></mui-table-colspec>
+          <mui-table-colspec label="Score" key="score" [format]="[['percent', '2.2']]"></mui-table-colspec>
+        </mui-table>
+      </mui-root-container>`,
+    props: {
+      dataSource: [ {id: 1, firstName: 'John', lastName: 'Rambo', score: 0.95 },
+                    {id: 2, firstName: 'Rockey', lastName: 'Balboa', score: 0.9425 },
+                    {id: 3, firstName: 'Marty', lastName: 'McFly', score: 0.98 },
+                    {id: 4, firstName: 'Emmet', lastName: 'Brown', score: 0.91 } ]
+    }
+  }}
+  </Story>
+</Preview>
+
+## Custom Template
+You can create a table where the a cell is rendered in a custom template. This way you can format the content of the cell
+completly on your own. The values in the `key` and `format` attributes are ignored in that case and need not to be set.
+<Preview>
+  <Story name='Custom Template' height='270px'>{{
+    template: `
+      <mui-root-container>
+        <mui-table [dataSource]="dataSource">
+          <mui-table-colspec label="ID" key="id">
+          </mui-table-colspec>
+          <mui-table-colspec label="First Name - Last Name">
+            <ng-template let-rowData>{{ rowData.firstName }} - {{ rowData.lastName }}</ng-template>
+          </mui-table-colspec>
+          <mui-table-colspec label="Score">
+            <ng-template let-rowData>{{ rowData.score | percent:'2.2' }}</ng-template>
+          </mui-table-colspec>
+        </mui-table>
+      </mui-root-container>`,
+    props: {
+      dataSource: [ {id: 1, firstName: 'John', lastName: 'Rambo', score: 0.95 },
+                    {id: 2, firstName: 'Rockey', lastName: 'Balboa', score: 0.94 },
+                    {id: 3, firstName: 'Marty', lastName: 'McFly', score: 0.98 },
+                    {id: 4, firstName: 'Emmet', lastName: 'Brown', score: 0.91 } ]
+      }
+    }
+  }}
+  </Story>
+</Preview>
+
+## Reference
+The table below lists the properties of the classes behind the selectors used to create the different tables.
+<ComponentsTable components={{
+  'TableComponent': TableComponent,
+  'TableColspecComponent': TableColspecComponent}} 
+  exclude={'_.*|ng.*'} 
+/>

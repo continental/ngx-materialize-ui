@@ -1,0 +1,163 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "libs",
+  "projects": {
+    "materialize-ui-playground": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/materialize-ui-playground",
+      "sourceRoot": "apps/materialize-ui-playground/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/materialize-ui-playground",
+            "index": "apps/materialize-ui-playground/src/index.html",
+            "main": "apps/materialize-ui-playground/src/main.ts",
+            "polyfills": "apps/materialize-ui-playground/src/polyfills.ts",
+            "tsConfig": "apps/materialize-ui-playground/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/materialize-ui-playground/src/favicon.ico",
+              "apps/materialize-ui-playground/src/assets"
+            ],
+            "styles": [
+              "apps/materialize-ui-playground/src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/materialize-css/dist/js/materialize.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/materialize-ui-playground/src/environments/environment.ts",
+                  "with": "apps/materialize-ui-playground/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "materialize-ui-playground:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "materialize-ui-playground:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "materialize-ui-playground:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/materialize-ui-playground/src/test.ts",
+            "polyfills": "apps/materialize-ui-playground/src/polyfills.ts",
+            "tsConfig": "apps/materialize-ui-playground/tsconfig.spec.json",
+            "karmaConfig": "apps/materialize-ui-playground/karma.conf.js",
+            "assets": [
+              "apps/materialize-ui-playground/src/favicon.ico",
+              "apps/materialize-ui-playground/src/assets"
+            ],
+            "styles": [
+              "apps/materialize-ui-playground/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/materialize-ui-playground/**/*.ts",
+              "apps/materialize-ui-playground/**/*.html"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "apps/materialize-ui-playground/e2e/protractor.conf.js",
+            "devServerTarget": "materialize-ui-playground:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "materialize-ui-playground:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "materialize-ui-core": {
+      "projectType": "library",
+      "root": "libs/materialize-ui-core",
+      "sourceRoot": "libs/materialize-ui-core/src",
+      "prefix": "mui",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "libs/materialize-ui-core/tsconfig.lib.json",
+            "project": "libs/materialize-ui-core/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/materialize-ui-core/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/materialize-ui-core/src/test.ts",
+            "tsConfig": "libs/materialize-ui-core/tsconfig.spec.json",
+            "karmaConfig": "libs/materialize-ui-core/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/materialize-ui-core/**/*.ts",
+              "libs/materialize-ui-core/**/*.html"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "materialize-ui-playground"
+}

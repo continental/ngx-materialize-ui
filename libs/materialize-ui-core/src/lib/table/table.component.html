@@ -1,0 +1,20 @@
+<table [class.striped]="striped" [class.highlight]="rowTap.observers.length">
+    <thead>
+        <tr>
+            <th *ngFor="let colspec of _colspecs">
+                <ng-container [ngTemplateOutlet]="colspec._headerTemplate"></ng-container>
+            </th> 
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let rowData of dataSource" (click)="_onClick(rowData)">
+            <!-- If the user provided a custom row template use it, otherwise use the default template of the component -->
+            <td *ngFor="let colspec of _colspecs">
+                <ng-container
+                    [ngTemplateOutlet]="colspec._customCellTemplate != null ? colspec._customCellTemplate : colspec._defaultCellTemplate" 
+                    [ngTemplateOutletContext]="{ $implicit: rowData }">
+                </ng-container>
+            </td>
+        </tr>
+    </tbody>
+</table>

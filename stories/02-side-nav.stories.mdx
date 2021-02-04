@@ -1,0 +1,172 @@
+import { Meta, Story, Props, ComponentsTable, Preview } from '@storybook/addon-docs/blocks';
+import { action } from '@storybook/addon-actions';
+import { moduleMetadata } from '@storybook/angular';
+
+import { RootContainerComponent, SideNavComponent, PushContentComponent, AppBarComponent} from 'ngx-materialize-ui-core';
+
+import * as materialize from 'materialize-css/dist/js/materialize';
+
+<Meta title='Components/Side Nav' decorators={[
+  moduleMetadata({
+    declarations: [
+      RootContainerComponent,
+      SideNavComponent,
+      PushContentComponent,
+      AppBarComponent
+    ],
+    providers: []
+  })
+]} />
+
+# Side Nav
+The **Side Nav** component can be used to show the main navigation menu of the application. Besides simple links, the Side Nav can also 
+host a _user view_ which can be used to show information of the currently sigend in user. Additionally you can use dividers and subheaders
+to structure the contents of your Side Nav.
+
+Side Nav supports different behaviors which are set by the `mode` attribute. The available modes are `push`, `pushBelowAppBar` and `overlay`.
+
+## Push (default)
+In push mode the Side Nav pushes the view content next to it. Furthermore the Side Nav is sticky and needs to be actively closed 
+if desired. You can open the Side Nav initially by setting the `isOpen` attribute to `true`. In push mode this component is designed to
+be used in combination with the **Push Content** component. All content which shall be pushed to the side by the Side Nav shall be enclosed
+in the Push Content component using the `<mui-push-content>` element. Push mode works only on medium screen sizes and above. On smaller screen sizes the Side Nav automatically
+switches to overlay mode to improve the usability on small screen sizes.
+
+The preview below shows the **Side Nav** together with the **Push Content** component.
+
+<Preview>
+  <Story name='Push' height='350px'>{{
+    template: `
+      <mui-root-container>
+        <mui-side-nav #sideNav isOpen="true">
+          <li>
+            <div class="user-view">
+              <div class="background">
+                <img src="https://place-hold.it/300x176/999">
+              </div>
+              <a href="#user"><img class="circle" src="https://place-hold.it/64/393"></a>
+              <a href="#name"><span class="white-text name">John Doe</span></a>
+              <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+            </div>
+          </li>
+          <li><a href="#!" class="waves-effect"><i class="material-icons">cloud</i>First Link With Icon</a></li>
+          <li><a href="#!" class="waves-effect"><i class="material-icons">settings</i>Second Link With Icon</a></li>
+          <li><div class="divider"></div></li>
+          <li><a class="subheader">Subheader</a></li>
+          <li><a class="waves-effect" href="#!">Third Link without Icon</a></li>
+        </mui-side-nav>
+        <mui-push-content>Main content goes here!</mui-push-content>
+      </mui-root-container>`,
+  }}
+  </Story>
+</Preview>
+
+The preview below shows the **Side Nav** with the **App Bar** inside the **Push Content**. Using it this way you can design a Side Nav
+which pushes the entire main view to the side.
+
+<Preview>
+  <Story name='Push next to App Bar' height='350px'>{{
+    template: `
+      <mui-root-container>
+        <mui-side-nav isOpen="true" #sideNav>
+          <li>
+            <div class="user-view">
+              <div class="background">
+                <img src="https://place-hold.it/300x176/999">
+              </div>
+              <a href="#user"><img class="circle" src="https://place-hold.it/64/393"></a>
+              <a href="#name"><span class="white-text name">John Doe</span></a>
+              <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+            </div>
+          </li>
+          <li><a href="#!" class="waves-effect"><i class="material-icons">cloud</i>First Link With Icon</a></li>
+          <li><a href="#!" class="waves-effect"><i class="material-icons">settings</i>Second Link With Icon</a></li>
+          <li><div class="divider"></div></li>
+          <li><a class="subheader">Subheader</a></li>
+          <li><a class="waves-effect" href="#!">Third Link without Icon</a></li>
+        </mui-side-nav>
+        <mui-push-content>
+          <mui-app-bar (mainMenuTap)="sideNav.toggle()"></mui-app-bar>
+          Main content goes here!
+        </mui-push-content>
+      </mui-root-container>`,
+  }}
+  </Story>
+</Preview>
+
+## Push below App Bar
+By setting the `mode` attribute to `pushBelowAppBar` the **Side Nav** opens in push mode and behaves similar to the default `push`
+mode. The difference is that the Side Nav opens below the App Bar. Using this mode you can create an App Bar which is fixed and 
+static on the top and have a fixed Side Nav which does not overlay content of your App Bar. This mode is especially designed to 
+be used in combination with the **App Bar** Component.
+
+<Preview>
+  <Story name='Push below App Bar' height='350px'>{{
+    template: `
+      <mui-root-container>
+        <mui-app-bar (mainMenuTap)="sideNav.toggle()"></mui-app-bar>
+        <mui-side-nav isOpen="true" mode="pushBelowAppBar" #sideNav>
+          <li>
+            <div class="user-view">
+              <div class="background">
+                <img src="https://place-hold.it/300x176/999">
+              </div>
+              <a href="#user"><img class="circle" src="https://place-hold.it/64/393"></a>
+              <a href="#name"><span class="white-text name">John Doe</span></a>
+              <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+            </div>
+          </li>
+          <li><a href="#!" class="waves-effect"><i class="material-icons">cloud</i>First Link With Icon</a></li>
+          <li><a href="#!" class="waves-effect"><i class="material-icons">settings</i>Second Link With Icon</a></li>
+          <li><div class="divider"></div></li>
+          <li><a class="subheader">Subheader</a></li>
+          <li><a class="waves-effect" href="#!">Third Link without Icon</a></li>
+        </mui-side-nav>
+        <mui-push-content>Main content goes here!</mui-push-content>
+      </mui-root-container>`,
+  }}
+  </Story>
+</Preview>
+
+## Overlay
+To use the overlay mode set the `mode` attribute of the **Side Nav** to `overlay`. In this mode the Side Nav opens above the 
+main content and greys out the remaining visible main content. With that it forces the user to either tap an option in the 
+Side Nav or tap the greyed out main content. Both ways automatically close the Side Nav. 
+
+<Preview>
+  <Story name='Overlay' height='350px'>{{
+    template: `
+      <mui-root-container>
+        <mui-side-nav isOpen="true" mode="overlay" #sideNav>
+          <li>
+            <div class="user-view">
+              <div class="background">
+                <img src="https://place-hold.it/300x176/999">
+              </div>
+              <a href="#user"><img class="circle" src="https://place-hold.it/64/393"></a>
+              <a href="#name"><span class="white-text name">John Doe</span></a>
+              <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+            </div>
+          </li>
+          <li><a href="#!" class="waves-effect"><i class="material-icons">cloud</i>First Link With Icon</a></li>
+          <li><a href="#!" class="waves-effect"><i class="material-icons">settings</i>Second Link With Icon</a></li>
+          <li><div class="divider"></div></li>
+          <li><a class="subheader">Subheader</a></li>
+          <li><a class="waves-effect" href="#!">Third Link without Icon</a></li>
+        </mui-side-nav>
+        <p>
+          Main content goes here and is not pushed to side! 
+          <button class="btn" (click)="sideNav.open()">Open SideNav</button>
+        </p>
+      </mui-root-container>`,
+  }}
+  </Story>
+</Preview>
+
+## Reference
+The table below lists the properties of the `SideNavComponent` class which is behind the `<mui-side-nav>` selector.
+<ComponentsTable components={{
+  'SideNavComponent': SideNavComponent,
+  'PushContentComponent': PushContentComponent }} 
+  exclude={'_.*|ng.*'} 
+/>

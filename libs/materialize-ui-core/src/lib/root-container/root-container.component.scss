@@ -1,0 +1,181 @@
+
+$primary-color: #ffa500;
+$secondary-color: #6b6b6b;
+
+$font-stack: "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !default;
+
+@import "node_modules/animate.css/animate";
+@import "node_modules/materialize-css/sass/materialize";
+
+//=================================================================================================
+// Materialize NavBar Modifications
+//=================================================================================================
+nav > div.nav-wrapper {
+
+    // Change to flexbox layout
+    display: flex;
+    justify-content: space-between;
+
+    // Add a small padding to the right to make sure most right icon and potential dropdowns
+    // are not connected to the border of the view
+    padding-right: 5px;
+
+    .collection {
+        // Collections within the nav area shall not have margin and border
+        margin: 0;
+        border: none;
+
+        .collection-item {
+            padding: 10px;
+
+            i.material-icons {
+                height: 20.8px; 
+                line-height: 20.8px;
+            }
+        }
+    }
+
+    // Style for application title
+    .app-title {
+        font-weight: bold;
+        font-size: 1.4em;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    // style for groups and search bar
+    div {
+        &.app-bar-group {
+            display: flex;
+        }
+
+        &.input-field {
+            display: flex;
+            flex-grow: 1;
+
+            input {
+                padding-left: 45px; 
+                padding-right: 40px;
+            }
+        }
+
+        .collection {
+            border: none;
+            margin: 0;
+            li {
+                min-height: 10px;
+            }
+        }
+
+    }
+
+}
+
+//=================================================================================================
+// Materialize SideNav Modifications
+//=================================================================================================
+.sidenav {
+    height: 100%;
+    padding-bottom: 10px;
+
+    li > a {
+        // Make padding smaller to harmonize layout with main menu button
+        padding-left: 15px;
+        padding-right: 15px;
+        > i,
+        > i.material-icons {
+            margin-right: 15px;
+        }
+    }
+}
+
+// A class for the main content which can be pushed to make space for other components (e.g. SideNav)
+// The class below describes the layount in the mobile state.
+.main {
+    margin-left: 0;
+    transition: margin-left .5s;
+    &.main-pushed {
+        margin-left: 0;
+    }
+}
+
+// The clases below describe the behavior of the main contant and the SideNav in case of medium
+// or larger screens
+@media #{$medium-and-up} {
+    .sidenav-pushed-below-app-bar {
+        // Show side nav below app bar
+        height: calc(100% - #{$navbar-height}) !important;
+        margin-top: $navbar-height;
+        transition: margin-top .5s;
+    }
+    .sidenav-overlay-not-on-mend-and-up {
+        display: none !important;
+    }
+    .main {
+        &.main-pushed {
+            margin-left: 300px;
+        }    
+    }
+}
+
+//=================================================================================================
+// Materialize Card Modifications
+//=================================================================================================
+.card-content {
+    // Add classes to design card items
+    .card-content-metric {
+        margin-top: 1em;
+        font-family: Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+        >.title {
+            font-weight: 400;
+            font-size: 14px;
+        }
+        >.subtitle {
+            font-weight: 400;
+            font-size: 12px;
+        }
+        >.value {
+            font-weight: 300;
+            font-size: 26px;
+        }
+    }
+}
+
+//=================================================================================================
+// View Header Styles
+//=================================================================================================
+.view-header {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 6px;
+    border-bottom-style: solid;
+    border-bottom-color: lighten($secondary-color, 40%);
+    border-bottom-width: 1px;
+
+    // style for title and grops
+    div {
+        margin-bottom: 3px;
+
+        &.view-header-title {
+            display: flex;
+            font-size: 29px;
+        }
+
+        &.view-header-group {
+            display: flex;
+
+            .btn {
+                margin: 3px;
+            }
+
+            .collection {
+                border: none;
+                margin: 0;
+                li {
+                    min-height: 10px;
+                }
+            }
+        }
+    }
+}
