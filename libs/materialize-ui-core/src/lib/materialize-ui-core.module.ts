@@ -19,7 +19,11 @@ import { TableColspecComponent } from './table/table-colspec.component';
 import { ViewHeaderComponent } from './view-header/view-header.component';
 import { ViewHeaderActionComponent } from './view-header/view-header-action.component';
 import { ViewHeaderDropdownComponent } from './view-header/view-header-dropdown.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 import { TextBoxComponent } from './form-controls/text-box.component';
+import { SelectComponent } from './form-controls/select.component';
+import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
+import { ConfirmModalTextValidationComponent } from './confirm-modal/confirm-modal-text-validation.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +44,11 @@ import { TextBoxComponent } from './form-controls/text-box.component';
     ViewHeaderComponent,
     ViewHeaderActionComponent,
     ViewHeaderDropdownComponent,
-    TextBoxComponent
+    SpinnerComponent,
+    TextBoxComponent,
+    SelectComponent,
+    ConfirmModalComponent,
+    ConfirmModalTextValidationComponent
   ],
   imports: [
     CommonModule,
@@ -65,7 +73,11 @@ import { TextBoxComponent } from './form-controls/text-box.component';
     ViewHeaderComponent,
     ViewHeaderActionComponent,
     ViewHeaderDropdownComponent,
-    TextBoxComponent
+    SpinnerComponent,
+    TextBoxComponent,
+    SelectComponent,
+    ConfirmModalComponent,
+    ConfirmModalTextValidationComponent
   ]
 })
 export class MaterializeUiCoreModule { }

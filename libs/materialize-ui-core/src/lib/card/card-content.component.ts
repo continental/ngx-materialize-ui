@@ -5,7 +5,7 @@ import { Component, Input } from '@angular/core';
   selector: 'mui-card-content',
   template: `
     <div class="card-content">
-        <span *ngIf="title" class="card-title">{{title}}</span>
+        <span *ngIf="title" class="card-title truncate">{{title}}</span>
         <ng-content></ng-content>
     </div>`
 })

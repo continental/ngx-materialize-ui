@@ -1,0 +1,9 @@
+<div class="modal modal-confirm" #modal>
+  <div class="modal-content">
+    <ng-content></ng-content>
+  </div>
+  <div class="modal-footer">
+    <button class="modal-action waves-effect waves-green btn-flat" [disabled]="(_confirmModalService.confirmed$ | async) === false" (click)="_onConfirm()">Ok</button>
+    <button class="modal-action waves-effect waves-green btn-flat modal-close">Abbrechen</button>
+</div>
+</div>

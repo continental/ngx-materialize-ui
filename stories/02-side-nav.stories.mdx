@@ -27,7 +27,7 @@ Side Nav supports different behaviors which are set by the `mode` attribute. The
 
 ## Push (default)
 In push mode the Side Nav pushes the view content next to it. Furthermore the Side Nav is sticky and needs to be actively closed 
-if desired. You can open the Side Nav initially by setting the `isOpen` attribute to `true`. In push mode this component is designed to
+if desired. You can open the Side Nav initially by setting the `initiallyIsOpen` attribute to `true`. In push mode this component is designed to
 be used in combination with the **Push Content** component. All content which shall be pushed to the side by the Side Nav shall be enclosed
 in the Push Content component using the `<mui-push-content>` element. Push mode works only on medium screen sizes and above. On smaller screen sizes the Side Nav automatically
 switches to overlay mode to improve the usability on small screen sizes.
@@ -38,7 +38,7 @@ The preview below shows the **Side Nav** together with the **Push Content** comp
   <Story name='Push' height='350px'>{{
     template: `
       <mui-root-container>
-        <mui-side-nav #sideNav isOpen="true">
+        <mui-side-nav #sideNav initiallyIsOpen="true">
           <li>
             <div class="user-view">
               <div class="background">
@@ -68,7 +68,7 @@ which pushes the entire main view to the side.
   <Story name='Push next to App Bar' height='350px'>{{
     template: `
       <mui-root-container>
-        <mui-side-nav isOpen="true" #sideNav>
+        <mui-side-nav #sideNav initiallyIsOpen="true">
           <li>
             <div class="user-view">
               <div class="background">
@@ -105,7 +105,7 @@ be used in combination with the **App Bar** Component.
     template: `
       <mui-root-container>
         <mui-app-bar (mainMenuTap)="sideNav.toggle()"></mui-app-bar>
-        <mui-side-nav isOpen="true" mode="pushBelowAppBar" #sideNav>
+        <mui-side-nav #sideNav mode="pushBelowAppBar" initiallyIsOpen="true">
           <li>
             <div class="user-view">
               <div class="background">
@@ -137,7 +137,7 @@ Side Nav or tap the greyed out main content. Both ways automatically close the S
   <Story name='Overlay' height='350px'>{{
     template: `
       <mui-root-container>
-        <mui-side-nav isOpen="true" mode="overlay" #sideNav>
+        <mui-side-nav #sideNav mode="overlay" initiallyIsOpen="true">
           <li>
             <div class="user-view">
               <div class="background">

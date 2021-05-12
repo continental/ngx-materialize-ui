@@ -1,10 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { NgModule, Pipe, PipeTransform } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MaterializeUiCoreModule } from 'ngx-materialize-ui-core';
 import { CommonModule } from '@angular/common';
+import { FormsComponent } from './forms/forms.component';
+import { TableComponent } from './table/table.component';
+import { HomeComponent } from './home/home.component';
+
 
 @Pipe({
   name: 'cap'
@@ -17,10 +22,14 @@ export class CapPipe implements PipeTransform {
 
 @NgModule({
   declarations: [
-    AppComponent
-  ],
+    AppComponent,
+    HomeComponent,
+    TableComponent,
+    FormsComponent
+   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     MaterializeUiCoreModule,
     CommonModule

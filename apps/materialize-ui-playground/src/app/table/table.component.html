@@ -1,0 +1,11 @@
+<mui-view-header title="Table">
+</mui-view-header>
+
+<div class="row">
+    <mui-table class="col s12" [dataSource]="dataSource" highlight="true">
+        <mui-table-colspec label="ID" key="id"></mui-table-colspec>
+        <mui-table-colspec label="First Name" key="firstName"></mui-table-colspec>
+        <mui-table-colspec label="Last Name" key="lastName"></mui-table-colspec>
+        <mui-table-colspec label="Score" key="score" [format]="[['percent']]"></mui-table-colspec>
+    </mui-table>
+</div>

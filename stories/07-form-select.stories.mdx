@@ -1,0 +1,48 @@
+import { Meta, Story, Props, ComponentsTable, Preview } from '@storybook/addon-docs/blocks';
+import { action } from '@storybook/addon-actions';
+import { moduleMetadata } from '@storybook/angular';
+
+import { RootContainerComponent, SelectComponent} from 'ngx-materialize-ui-core';
+
+import * as materialize from 'materialize-css/dist/js/materialize';
+
+<Meta title='Form Controls/Select' decorators={[
+  moduleMetadata({
+    declarations: [
+      RootContainerComponent,
+      SelectComponent
+    ]
+  })
+]} />
+
+# Select
+The **Select** form control can be used to let the user choose one value out of a set of given options.
+
+## Basic
+In the most basic version, the Select just shows a label by setting the `label` attribute. You can set the
+available select options by setting the `options` attribute to an array of objects conaining a `value` and 
+a `label` attribute by default. If label and value have different key use the `optionsValueKey` and the 
+`optionsLabelKey` to customise for your individual key names. The Select is also compatible withe the 
+default `ngModel` directive used in template driven forms.
+<Preview>
+  <Story name='Basic' height='250px'>{{
+    template: `
+      <mui-root-container>
+        <mui-select label="My Select Label" [options]="selectOptions">
+        </mui-select>
+      </mui-root-container>`,
+    props: {
+      selectOptions: [ { value: 'val1', label: 'Value 1' },
+                       { value: 'val2', label: 'Value 2' },
+                       { value: 'val3', label: 'Value 3' } ]
+    }
+  }}
+  </Story>
+</Preview>
+
+## Reference
+The table below lists the properties of the classes behind the selectors used to create the different view header variants.
+<ComponentsTable components={{
+  'Select': SelectComponent }} 
+  exclude={'_.*|ng.*'} 
+/> 

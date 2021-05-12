@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, Input } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, Input, OnChanges, OnInit } from '@angular/core';
 import { PushContentService } from './push-content.service';
 
 // Declare materialize css global variable
@@ -8,11 +8,11 @@ declare const M: any;
   selector: 'mui-side-nav',
   templateUrl: './side-nav.component.html'
 })
-export class SideNavComponent implements AfterViewInit {
+export class SideNavComponent implements OnInit, AfterViewInit {
 
   /** Initally sets the side nav to open or closed. */
   @Input()
-  isOpen = false;
+  initiallyIsOpen = false;
 
   /**
    * Sets the mode of the sidebar.
@@ -24,10 +24,27 @@ export class SideNavComponent implements AfterViewInit {
   @ViewChild('sidenav')
   _sidenavElem: ElementRef;
 
+  private _isOpen = false;
+
   // The materialize side nav instance
   private _sideNavInstance: any;
 
   constructor(private _pushContentService: PushContentService) { }
+
+  /** Gets a value indicating if the side nav is open or not. */
+  get isOpen() {
+    return this,this._isOpen;
+  }
+
+  ngOnInit(): void {
+    if(this.initiallyIsOpen) {
+      this._isOpen = true;
+      // If side nav shall be open initially open it
+      if(this.mode === 'push' || this.mode === 'pushBelowAppBar') {
+        this._pushContentService.pushContent();
+      }
+    }
+  }
 
   ngAfterViewInit(): void {
     // Initialize the materialize side nav component
@@ -43,15 +60,15 @@ export class SideNavComponent implements AfterViewInit {
       this._sideNavInstance._overlay.classList.add('sidenav-overlay-not-on-mend-and-up');
     }
 
-    if(this.isOpen) {
-      // If side nav shall be open initially open it
-      this.open();
+    if(this.initiallyIsOpen) {
+      // Initially open side nav
+      this._sideNavInstance.open();
     }
   }
 
   /** Toggle the side nav. If closed it gets opened, if open it gets closed. */
   toggle() {
-    if(this.isOpen) {
+    if(this._isOpen) {
       this.close();
     } else {
       this.open();
@@ -63,7 +80,7 @@ export class SideNavComponent implements AfterViewInit {
     if(this.mode === 'push' || this.mode === 'pushBelowAppBar') {
       this._pushContentService.pushContent();
     }
-    this.isOpen = true;
+    this._isOpen = true;
     this._sideNavInstance.open();
   }
 
@@ -72,7 +89,7 @@ export class SideNavComponent implements AfterViewInit {
     if(this.mode === 'push' || this.mode === 'pushBelowAppBar') {
       this._pushContentService.unpushContent();
     }
-    this.isOpen = false;
+    this._isOpen = false;
     this._sideNavInstance.close();
   }
 

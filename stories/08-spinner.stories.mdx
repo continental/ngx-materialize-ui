@@ -1,0 +1,55 @@
+import { Meta, Story, Props, ComponentsTable, Preview } from '@storybook/addon-docs/blocks';
+import { action } from '@storybook/addon-actions';
+import { moduleMetadata } from '@storybook/angular';
+import { PercentPipe } from '@angular/common';
+
+import { RootContainerComponent, SpinnerComponent} from 'ngx-materialize-ui-core';
+
+import * as materialize from 'materialize-css/dist/js/materialize';
+
+<Meta title='Components/Spinner' decorators={[
+  moduleMetadata({
+    declarations: [
+      RootContainerComponent,
+      SpinnerComponent
+    ],
+    providers: [PercentPipe]
+  })
+]} />
+
+# Spinner
+The **Spinner** component is intendet to indicate to the user that the app is currently busy.
+
+## Basic
+In the most basic version, the spinner just shows a animation and puts itself as overlay over 
+its entire own dom node.
+<Preview>
+  <Story name='Basic' height='150px'>{{
+    template: `
+      <mui-root-container>
+        <mui-spinner></mui-spinner>
+      </mui-root-container>`
+  }}
+  </Story>
+</Preview>
+
+## Auto Show Timeout
+You can specify an auto show timeout in milliseconds via the `autoShowTimeout` attribute to controll
+the delay when the spinner shall be shown. After the timeout the spinner becomes visible. Furthermore
+you can controll hiding the spinner with the `hideSpinner` attribute.
+<Preview>
+  <Story name='Auto Show Timeout' height='150px'>{{
+    template: `
+      <mui-root-container>
+        <mui-spinner [autoShowTimeout]="1000"></mui-spinner>
+      </mui-root-container>`
+  }}
+  </Story>
+</Preview>
+
+## Reference
+The table below lists the properties of the classes behind the selectors used to create the different view header variants.
+<ComponentsTable components={{
+  'Spinner': SpinnerComponent}} 
+  exclude={'_.*|ng.*'} 
+/>

@@ -1,0 +1,23 @@
+<mui-spinner *ngIf="showSpinner"></mui-spinner>
+
+<mui-view-header title="Home">
+  <mui-view-header-action actionName="Action1" iconName="refresh"></mui-view-header-action>
+  <mui-view-header-action actionName="Action2" iconName="refresh"></mui-view-header-action>
+  <mui-view-header-dropdown iconName="settings">
+      <ul class="collection">
+          <li class="collection-item">First</li>
+          <li class="collection-item">Second</li>
+          <li class="collection-item">Third</li>
+          <li class="collection-item">Fourth</li>
+      </ul>
+  </mui-view-header-dropdown>
+</mui-view-header>
+
+<button class="btn" (click)="_onShowSpinner()">Show Spinner</button>
+<button class="btn" (click)="confirmModal.open()">Open Confirm Modal</button>
+
+<mui-confirm-modal #confirmModal>
+  Do you really want to confirm your action?
+  <mui-confirm-modal-text-validation label="Type 'Yes' as confirm value" confirmValue="Yes"></mui-confirm-modal-text-validation>
+  <mui-confirm-modal-text-validation label="Type 'No' as confirm value" confirmValue="No"></mui-confirm-modal-text-validation>
+</mui-confirm-modal>

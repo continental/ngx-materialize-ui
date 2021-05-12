@@ -1,6 +1,22 @@
 {
   "name": "ngx-materialize-ui-core",
-  "version": "0.0.9",
+  "description": "NGX Materialize UI is an Angular Component Library based on the Materialize CSS framework.",
+  "version": "0.0.15",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/continental/ngx-materialize-ui.git"
+  },
+  "keywords": [
+    "Angular",
+    "Components",
+    "Materialize UI"
+  ],
+  "author": "Continental Corporation, Daniel Murrmann",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/continental/ngx-materialize-ui/issues"
+  },
+  "homepage": "https://github.com/continental/ngx-materialize-ui#readme",
   "peerDependencies": {
     "@angular/common": "^11.0.0",
     "@angular/core": "^11.0.0"

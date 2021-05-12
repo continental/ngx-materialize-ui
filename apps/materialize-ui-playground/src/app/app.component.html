@@ -12,7 +12,7 @@
             </ul>
         </mui-app-bar-dropdown>
     </mui-app-bar>
-    <mui-side-nav #sideNav mode="pushBelowAppBar">
+    <mui-side-nav #sideNav mode="pushBelowAppBar" [initiallyIsOpen]="true">
         <li>
             <div class="user-view">
                 <div class="background">
@@ -23,36 +23,14 @@
             <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
           </div>
         </li>
-        <li><a href="#!" class="waves-effect"><i class="material-icons">cloud</i>First Link With Icon</a></li>
-        <li><a href="#!" class="waves-effect"><i class="material-icons">settings</i>Second Link With Icon</a></li>
+        <li><a href="#!" class="waves-effect" routerLink="home"><i class="material-icons">home</i>Home</a></li>
+        <li><a href="#!" class="waves-effect" routerLink="table"><i class="material-icons">list</i>Table</a></li>
+        <li><a href="#!" class="waves-effect" routerLink="forms"><i class="material-icons">content_paste</i>Forms</a></li>
         <li><div class="divider"></div></li>
         <li><a class="subheader">Subheader</a></li>
-        <li><a class="waves-effect" href="#!">Third Link without Icon</a></li>
+        <li><a class="waves-effect" href="#!">Link without Icon</a></li>
     </mui-side-nav>
     <mui-push-content>
-        <mui-view-header title="My Page">
-            <mui-view-header-action actionName="Action1" iconName="refresh"></mui-view-header-action>
-            <mui-view-header-action actionName="Action2" iconName="refresh"></mui-view-header-action>
-            <mui-view-header-dropdown iconName="settings">
-                <ul class="collection">
-                    <li class="collection-item">First</li>
-                    <li class="collection-item">Second</li>
-                    <li class="collection-item">Third</li>
-                    <li class="collection-item">Fourth</li>
-                </ul>
-            </mui-view-header-dropdown>
-        </mui-view-header>
-
-        <div class="row">
-            <mui-text-box class="col s12" label="Text Box Label" name="myTextBox"></mui-text-box>
-
-            <mui-table class="col s12" [dataSource]="dataSource" highlight="true">
-                <mui-table-colspec label="ID" key="id"></mui-table-colspec>
-                <mui-table-colspec label="First Name" key="firstName"></mui-table-colspec>
-                <mui-table-colspec label="Last Name" key="lastName"></mui-table-colspec>
-                <mui-table-colspec label="Score" key="score" [format]="[['percent']]"></mui-table-colspec>
-            </mui-table>
-        </div>
-         
+        <router-outlet></router-outlet>
     </mui-push-content>
 </mui-root-container>

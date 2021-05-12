@@ -1,0 +1,77 @@
+import { Meta, Story, Props, ComponentsTable, Preview } from '@storybook/addon-docs/blocks';
+import { action } from '@storybook/addon-actions';
+import { moduleMetadata } from '@storybook/angular';
+import { PercentPipe } from '@angular/common';
+
+import { RootContainerComponent, ConfirmModalComponent, ConfirmModalTextValidationComponent, ConfirmModalService} from 'ngx-materialize-ui-core';
+
+import * as materialize from 'materialize-css/dist/js/materialize';
+
+<Meta title='Components/Confirm Modal' decorators={[
+  moduleMetadata({
+    declarations: [
+      RootContainerComponent,
+      ConfirmModalComponent,
+      ConfirmModalTextValidationComponent
+    ],
+    providers: [ConfirmModalService]
+  })
+]} />
+
+# Confirm Modal
+The **Confirm Modal** component is intendet to ask the user for a confirmation in case 
+a critical action shall be executed.
+
+## Basic
+In the most basic version, the confirm modal shows a text to the user with a confirmation 
+question. If the user confirms via the modal the method bound to the `confirmAction` attribute
+is executed.
+<Preview>
+  <Story name='Basic' height='180px'>{{
+    template: `
+      <mui-root-container>
+        <button class="btn" (click)="confirmModal.open()">Open Modal</button>
+        <mui-confirm-modal #confirmModal (confirmAction)="onConfirm()">Text to ask user for confirmation.</mui-confirm-modal>
+      </mui-root-container>`,
+    props: {
+      onConfirm: () => {
+        action('User has confirmed!')();
+      }
+    }
+  }}
+  </Story>
+</Preview>
+
+## Text Validation
+If you want to make sure the user really knows what he does and does not accidental confirm a 
+wrong action, your can ask him for a text input. Using this feature you can ask the user for 
+the id or the name of the entity he is underway to execute the critical action on. 
+To use this feature just add one or more `ConfirmModalTextValidationComponent`s to the modal
+and specify a label for them and an expeced confirm value. As long as the user does not enter 
+the correct confirm value the OK button of the confirm modal remains disabled.
+<Preview>
+  <Story name='Text Validation' height='280px'>{{
+    template: `
+      <mui-root-container>
+        <button class="btn" (click)="confirmModal.open()">Open Modal</button>
+        <mui-confirm-modal #confirmModal (confirmAction)="onConfirm()">
+          Text to ask user for confirmation.
+          <mui-confirm-modal-text-validation label="Type 'Yes' as confirm value" confirmValue="Yes"></mui-confirm-modal-text-validation>
+        </mui-confirm-modal>
+      </mui-root-container>`,
+    props: {
+      onConfirm: () => {
+        action('User has confirmed!')();
+      }
+    }
+  }}
+  </Story>
+</Preview>
+
+## Reference
+The table below lists the properties of the classes behind the selectors used to create the different view header variants.
+<ComponentsTable components={{
+  'ConfirmModalComponent': ConfirmModalComponent,
+  'ConfirmModalTextValidationComponent': ConfirmModalTextValidationComponent}} 
+  exclude={'_.*|ng.*'} 
+/>

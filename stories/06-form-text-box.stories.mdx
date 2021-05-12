@@ -1,7 +1,6 @@
 import { Meta, Story, Props, ComponentsTable, Preview } from '@storybook/addon-docs/blocks';
 import { action } from '@storybook/addon-actions';
 import { moduleMetadata } from '@storybook/angular';
-import { PercentPipe } from '@angular/common';
 
 import { RootContainerComponent, TextBoxComponent} from 'ngx-materialize-ui-core';
 
@@ -12,8 +11,7 @@ import * as materialize from 'materialize-css/dist/js/materialize';
     declarations: [
       RootContainerComponent,
       TextBoxComponent
-    ],
-    providers: [PercentPipe]
+    ]
   })
 ]} />
 
