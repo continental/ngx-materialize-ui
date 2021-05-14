@@ -18,4 +18,4 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 This library uses [Storybook](https://github.com/storybookjs/storybook) for development and documentation. We will make the storybook documenation pages available online soon. 
 
 ### Running documentation locally
-To run the documentation locally just clone the repository, execute an `npm install` and after that `npm run storybook`. Your can then browse the documentation on `http://localhost:6006`.
+To run the documentation locally just clone the repository, execute an `npm install` and after that `npm run storybook`. You can then browse the documentation on `http://localhost:6006`.
