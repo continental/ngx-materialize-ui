@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
   template: `<div class="card-content-metric">
               <div *ngIf="title" class="title">{{title}}</div>
               <div *ngIf="subtitle" class="subtitle">{{subtitle}}</div>
-              <div class="value"><ng-content></ng-content></div>
+              <div class="value truncate"><ng-content></ng-content></div>
             </div>`
 })
 export class CardContentMetricComponent {

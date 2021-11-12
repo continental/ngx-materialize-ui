@@ -27,6 +27,7 @@
                 <mui-text-box class="col s12" name="name" label="Name" required minlength="3" [(ngModel)]="model.section2.textBox1"></mui-text-box>
                 <mui-text-box class="col s12" name="description" label="Description" required [(ngModel)]="model.section2.textBox2"></mui-text-box>
                 <mui-text-box class="col s12" name="password" label="Password" required type="password" [(ngModel)]="model.section2.passwordBox"></mui-text-box>
+                <mui-text-area class="col s12" name="text" label="Text Area" required [(ngModel)]="model.section2.textArea"></mui-text-area>
             </div>
         </form>
         <button class="btn" [disabled]="!section2Form.valid" (click)="_onSave(model.section2)">Save</button>

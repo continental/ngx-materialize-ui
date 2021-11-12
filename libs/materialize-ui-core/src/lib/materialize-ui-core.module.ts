@@ -24,6 +24,8 @@ import { TextBoxComponent } from './form-controls/text-box.component';
 import { SelectComponent } from './form-controls/select.component';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { ConfirmModalTextValidationComponent } from './confirm-modal/confirm-modal-text-validation.component';
+import { TextAreaComponent } from './form-controls/text-area.component';
+import { CollapsibleComponent } from './collapsible/collapsible.component';
 
 @NgModule({
   declarations: [
@@ -46,9 +48,12 @@ import { ConfirmModalTextValidationComponent } from './confirm-modal/confirm-mod
     ViewHeaderDropdownComponent,
     SpinnerComponent,
     TextBoxComponent,
+    TextAreaComponent,
     SelectComponent,
     ConfirmModalComponent,
-    ConfirmModalTextValidationComponent
+    ConfirmModalTextValidationComponent,
+    TextAreaComponent,
+    CollapsibleComponent
   ],
   imports: [
     CommonModule,
@@ -75,9 +80,11 @@ import { ConfirmModalTextValidationComponent } from './confirm-modal/confirm-mod
     ViewHeaderDropdownComponent,
     SpinnerComponent,
     TextBoxComponent,
+    TextAreaComponent,
     SelectComponent,
     ConfirmModalComponent,
-    ConfirmModalTextValidationComponent
+    ConfirmModalTextValidationComponent,
+    CollapsibleComponent
   ]
 })
 export class MaterializeUiCoreModule { }

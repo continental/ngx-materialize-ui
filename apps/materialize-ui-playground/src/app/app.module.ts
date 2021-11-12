@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { FormsComponent } from './forms/forms.component';
 import { TableComponent } from './table/table.component';
 import { HomeComponent } from './home/home.component';
+import { InfoComponent } from './info/info.component';
 
 
 @Pipe({
@@ -25,7 +26,8 @@ export class CapPipe implements PipeTransform {
     AppComponent,
     HomeComponent,
     TableComponent,
-    FormsComponent
+    FormsComponent,
+    InfoComponent
    ],
   imports: [
     BrowserModule,

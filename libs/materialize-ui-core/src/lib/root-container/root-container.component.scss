@@ -130,6 +130,14 @@ nav > div.nav-wrapper {
 //=================================================================================================
 // Materialize Card Modifications
 //=================================================================================================
+.card {
+    &.fixed-height-med-and-up {   
+        @media #{$medium-and-up} {
+            height: 320px;
+        }
+    }
+}
+
 .card-content {
     // Add classes to design card items
     .card-content-metric {
@@ -145,7 +153,7 @@ nav > div.nav-wrapper {
         }
         >.value {
             font-weight: 300;
-            font-size: 26px;
+            font-size: 20px;
         }
     }
 }
@@ -158,8 +166,15 @@ form.ng-touched {
         input[type=text]:not(.browser-default) {
             @extend %invalid-input-style;
             box-shadow: none;
-        }
+        } 
         input[type=text]:not(.browser-default):focus:not([readonly]) {
+            @extend %invalid-input-style;
+        }
+        textarea:not(.browser-default) {
+            @extend %invalid-input-style;
+            box-shadow: none;
+        } 
+        textarea:not(.browser-default):focus:not([readonly]) {
             @extend %invalid-input-style;
         }
     }

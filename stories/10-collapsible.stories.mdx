@@ -1,0 +1,53 @@
+import { Meta, Story, Props, ComponentsTable, Preview } from '@storybook/addon-docs/blocks';
+import { action } from '@storybook/addon-actions';
+import { moduleMetadata } from '@storybook/angular';
+import { PercentPipe } from '@angular/common';
+
+import { RootContainerComponent, CollapsibleComponent} from 'ngx-materialize-ui-core';
+
+import * as materialize from 'materialize-css/dist/js/materialize';
+
+<Meta title='Components/Collapsible' decorators={[
+  moduleMetadata({
+    declarations: [
+      RootContainerComponent,
+      CollapsibleComponent
+    ],
+    providers: []
+  })
+]} />
+
+# Collapsible
+The **Collapsible** component is intendet to show overview data with detail data on the same page.
+
+## Basic
+In the most basic version, the collapsible can open and close sections.
+<Preview>
+  <Story name='Basic' height='250px'>{{
+    template: `
+      <mui-root-container>
+        <mui-collapsible>
+          <li>
+            <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
+            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+          </li>
+          <li>
+            <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
+            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+          </li>
+          <li>
+            <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
+            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+          </li>
+        </mui-collapsible>
+      </mui-root-container>`
+  }}
+  </Story>
+</Preview>
+
+## Reference
+The table below lists the properties of the classes behind the selectors used to create the different view header variants.
+<ComponentsTable components={{
+  'Spinner': CollapsibleComponent}} 
+  exclude={'_.*|ng.*'} 
+/>

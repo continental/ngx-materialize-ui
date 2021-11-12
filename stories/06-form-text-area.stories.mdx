@@ -2,32 +2,32 @@ import { Meta, Story, Props, ComponentsTable, Preview } from '@storybook/addon-d
 import { action } from '@storybook/addon-actions';
 import { moduleMetadata } from '@storybook/angular';
 
-import { RootContainerComponent, TextBoxComponent} from 'ngx-materialize-ui-core';
+import { RootContainerComponent, TextAreaComponent} from 'ngx-materialize-ui-core';
 
 import * as materialize from 'materialize-css/dist/js/materialize';
 
-<Meta title='Form Controls/Text Box' decorators={[
+<Meta title='Form Controls/Text Area' decorators={[
   moduleMetadata({
     declarations: [
       RootContainerComponent,
-      TextBoxComponent
+      TextAreaComponent
     ]
   })
 ]} />
 
-# Text Box
-The **Text Box** form control can be used to show a single line text input.
+# Text Area
+The **Text Area** form control can be used to input, show and edit multiple lines of text.
 
 ## Basic
-In the most basic version, the Text Box just shows a label by setting the `label` attribute. The **most important** step when using 
-the Text Box is to set a unique name to the `name` attribute. The Text Box is also compatible withe the default `ngModel`
+In the most basic version, the Text Area just shows a label by setting the `label` attribute. The **most important** step when using 
+the Text Area is to set a unique name to the `name` attribute. The Text Area is also compatible withe the default `ngModel`
 directive used in template driven forms.
 <Preview>
   <Story name='Basic' height='100px'>{{
     template: `
       <mui-root-container>
-        <mui-text-box label="My Text Box Label" name="myTextBox">
-        </mui-text-box>
+        <mui-text-area label="My Text Area Label" name="myTextBox">
+        </mui-text-area>
       </mui-root-container>`
   }}
   </Story>
@@ -36,6 +36,6 @@ directive used in template driven forms.
 ## Reference
 The table below lists the properties of the classes behind the selectors used to create the different view header variants.
 <ComponentsTable components={{
-  'TextBox': TextBoxComponent }} 
+  'TextBox': TextAreaComponent }} 
   exclude={'_.*|ng.*'} 
 /> 

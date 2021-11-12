@@ -32,7 +32,6 @@ export class ConfirmModalComponent implements AfterViewInit {
 
   /** Creates a new confirm modal instance. */
   constructor(public _confirmModalService: ConfirmModalService) {
-    _confirmModalService.confirmed$.subscribe(c => console.log('Sub Confirmed: ' + c));
   }
 
   // Initializes the modal

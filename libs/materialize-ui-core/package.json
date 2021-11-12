@@ -1,7 +1,7 @@
 {
   "name": "ngx-materialize-ui-core",
   "description": "NGX Materialize UI is an Angular Component Library based on the Materialize CSS framework.",
-  "version": "0.0.15",
+  "version": "0.0.18",
   "repository": {
     "type": "git",
     "url": "https://github.com/continental/ngx-materialize-ui.git"

@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MaterializeUiCoreModule } from 'ngx-materialize-ui-core';
 import { FormsComponent } from './forms/forms.component';
 import { HomeComponent } from './home/home.component';
+import { InfoComponent } from './info/info.component';
 import { TableComponent } from './table/table.component';
 
 const routes: Routes = [{
@@ -14,6 +15,9 @@ const routes: Routes = [{
 }, {
   path: 'forms',
   component: FormsComponent
+}, {
+  path: 'info',
+  component: InfoComponent
 }, {
   path: '**',
   redirectTo: 'home'
