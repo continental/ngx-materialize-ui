@@ -1,3 +1,6 @@
+> **Note**
+> This project is currently not actively maintained.
+
 # NGX Materialize UI
 
 NGX Materialize UI is an Angular Component Library based on the [Materialize CSS](https://github.com/Dogfalo/materialize) framework. In generall it wraps the compoents from the Materialize CSS Framework into Angular components. 
